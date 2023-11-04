@@ -19,6 +19,15 @@ brain.screen.print("Hello")
 def goForward():
     mu.sPrint("going forward")
 
+def goBack():
+    mu.sPrint("going back")
+
+def goLeft():
+    mu.sPrint("going left")
+
+def goRight():
+    mu.sPrint("going right")
+
 #while loop
 while True:
     if(controller.buttonUp.pressing):
