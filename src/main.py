@@ -6,7 +6,7 @@
 # ---------------------------------------------------------------------------- #
 
 from vex import *
-import myutils as mu
+#import myutils as mu
 
 # Brain should be defined by default
 brain = Brain()
@@ -17,19 +17,24 @@ brain.screen.print("Hello")
 #movement funcs
 
 def goForward():
-    mu.sPrint("going forward")
+    brain.screen.print("going forward")
+    brain.screen.next_row()
 
 def goBack():
-    mu.sPrint("going back")
+    brain.screen.print("going back")
+    brain.screen.next_row()
 
 def goLeft():
-    mu.sPrint("going left")
+    brain.screen.print("going left")
+    brain.screen.next_row()
 
 def goRight():
-    mu.sPrint("going right")
+    brain.screen.print("going right")
+    brain.screen.next_row()
 
 #while loop
 while True:
+    wait(1, SECONDS)
     if(controller.buttonUp.pressing):
         goForward()
     elif(controller.buttonDown.pressing):
@@ -38,4 +43,5 @@ while True:
         goLeft()
     elif(controller.buttonRight.pressing):
         goRight()
-
+    brain.screen.print("break")
+    brain.screen.next_row()
