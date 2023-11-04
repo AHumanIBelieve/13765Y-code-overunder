@@ -6,6 +6,7 @@
 # ---------------------------------------------------------------------------- #
 
 from vex import *
+counter = 0
 #import myutils as mu
 
 # Brain should be defined by default
@@ -35,13 +36,23 @@ def goRight():
 #while loop
 while True:
     wait(1, SECONDS)
-    if(controller.buttonUp.pressing):
+    if(controller.buttonUp.pressing == False):
+        brain.screen.print("for'rd")
         goForward()
-    elif(controller.buttonDown.pressing):
+        brain.screen.next_row()
+    elif(controller.buttonDown.pressing == True):
+        brain.screen.print("back'rd")
         goBack()
-    if(controller.buttonLeft.pressing):
+        brain.screen.next_row()
+    if(controller.buttonLeft.pressing == False):
         goLeft()
-    elif(controller.buttonRight.pressing):
+        brain.screen.print("lft")
+        brain.screen.next_row()
+    elif(controller.buttonRight.pressing == False):
         goRight()
-    brain.screen.print("break")
-    brain.screen.next_row()
+        brain.screen.print("rght")
+        brain.screen.next_row()
+    counter += 1
+    if(counter==3):
+        brain.screen.clear_screen()
+        brain.screen.set_cursor(1, 1)
