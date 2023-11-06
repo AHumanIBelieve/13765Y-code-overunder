@@ -9,11 +9,31 @@ from vex import *
 counter = 0
 #import myutils as mu
 
-# Brain should be defined by default
+# defining stuff
 brain = Brain()
 controller = Controller()
 
+left_drive = Motor(Ports.PORT1, GearSetting.RATIO_18_1, False)
+right_drive = Motor(Ports.PORT2, GearSetting.RATIO_18_1, True)
+drivetrain = DriveTrain(left_drive, right_drive)
+
 brain.screen.print("Hello")
+brain.screen.next_row()
+
+# get input funcs
+
+def getXAxisInput():
+    inputVal = controller.axis4.position()
+    brain.screen.print(inputVal, ", ")
+
+def getYAxisInput():
+    inputVal = controller.axis3.position()
+    brain.screen.print(inputVal)
+
+def processInputAndReturnMovementAsInts(xAxis, yAxis):
+    whereToMove = [0, 0, 0, 0]
+    if(xAxis > 0):
+        
 
 #movement funcs
 
@@ -35,24 +55,12 @@ def goRight():
 
 #while loop
 while True:
-    wait(1, SECONDS)
-    if(controller.buttonUp.pressing == False):
-        brain.screen.print("for'rd")
-        goForward()
-        brain.screen.next_row()
-    elif(controller.buttonDown.pressing == True):
-        brain.screen.print("back'rd")
-        goBack()
-        brain.screen.next_row()
-    if(controller.buttonLeft.pressing == False):
-        goLeft()
-        brain.screen.print("lft")
-        brain.screen.next_row()
-    elif(controller.buttonRight.pressing == False):
-        goRight()
-        brain.screen.print("rght")
-        brain.screen.next_row()
+    wait(1000)
+    getXAxisInput()
+    getYAxisInput()
+    brain.screen.next_row()
     counter += 1
-    if(counter==3):
+    if(counter == 4):
         brain.screen.clear_screen()
-        brain.screen.set_cursor(1, 1)
+        brain.screen.set_cursor(1,1)
+        counter = 0
