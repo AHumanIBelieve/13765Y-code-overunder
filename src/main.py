@@ -24,16 +24,27 @@ brain.screen.next_row()
 
 def getXAxisInput():
     inputVal = controller.axis4.position()
-    brain.screen.print(inputVal, ", ")
+    return inputVal
 
 def getYAxisInput():
     inputVal = controller.axis3.position()
-    brain.screen.print(inputVal)
+    return inputVal
 
-def processInputAndReturnMovementAsInts(xAxis, yAxis):
-    whereToMove = [0, 0, 0, 0]
-    if(xAxis > 0):
-        
+#gets inputs and returns them in an array as numbers between -1 and 1
+def processInputAndReturnMovementAsInts(xAxis, yAxis):     
+    whereToMove = [0, 0, 0, 0] #move right, left, forward, back
+    if(xAxis > 0): #right
+        whereToMove[0] = xAxis/100
+    elif(xAxis < 0): #left
+        whereToMove[1] = xAxis/100
+    
+    if(yAxis > 0): #forward
+        whereToMove[2] = yAxis/100
+    elif(yAxis < 0): #back
+        whereToMove[3] = yAxis/100
+    
+    return whereToMove
+
 
 #movement funcs
 
@@ -56,11 +67,13 @@ def goRight():
 #while loop
 while True:
     wait(1000)
-    getXAxisInput()
-    getYAxisInput()
+    xAxis = getXAxisInput()
+    yAxis = getYAxisInput()
+    inputArray = processInputAndReturnMovementAsInts(xAxis, yAxis)
+    brain.screen.print(inputArray)
     brain.screen.next_row()
     counter += 1
-    if(counter == 4):
+    if(counter == 10):
         brain.screen.clear_screen()
         brain.screen.set_cursor(1,1)
         counter = 0
