@@ -5,6 +5,7 @@ Notebook will be uploaded after the season.
 
 ## Wiring Setup
 Ports 1 and 2 - left of the drivetrain
+
 Ports 9 and 10 - right of the drivetrain
 
 ## Changelog
