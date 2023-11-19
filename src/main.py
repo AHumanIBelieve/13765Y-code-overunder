@@ -6,7 +6,6 @@
 # ---------------------------------------------------------------------------- #
 
 from vex import *
-counter = 0
 
 # defining stuff
 brain = Brain()
@@ -23,18 +22,22 @@ drivetrain = DriveTrain(left_drive_smart, right_drive_smart)
 brain.screen.print("Hello")
 brain.screen.next_row()
 
-# get input funcs
-
-def getXAxisInput():
-    inputVal = controller.axis4.position()
+# process input from arrow keys
+def getXAxisInputButtons():
+    inputVal = 0
+    if (controller.buttonLeft.pressing()):
+        inputVal = -100
+    elif (controller.buttonLeft.pressing()):
+        inputVal = 100
     return inputVal
-
-def getYAxisInput():
-    inputVal = controller.axis3.position()
+def getYAxisInputButtons():
+    inputVal = 0
+    if (controller.buttonDown.pressing()):
+        inputVal = -100
+    elif (controller.buttonRight.pressing()):
+        inputVal = 100
     return inputVal
-
-#gets inputs and returns them in an array as numbers between 0 and 100
-def processInputAndReturnMovementAsIntArray(xAxis, yAxis):     
+def processButtonInputAndReturnMovementAsIntArray(xAxis, yAxis):     
     whereToMove = [0, 0, 0, 0] #move right, left, forward, back
     if(xAxis > 0): #right
         whereToMove[0] = xAxis
@@ -47,59 +50,59 @@ def processInputAndReturnMovementAsIntArray(xAxis, yAxis):
         whereToMove[3] = yAxis
     
     return whereToMove
-
-
-#movement funcs
-
-def processInputArrayAndCallMovementFuncs(inputArray):
+def processButtonInputArrayAndCallMovementFuncs(inputArray):
     if(inputArray[2] > 0): #go forward
-        goForward(inputArray[2])
+        goForwardButtons(inputArray[2])
     elif(inputArray[3] < 0): #go backwards
-        goBack(inputArray[3])
+        goBackButtons(inputArray[3])
     else:
         stopMovement()
     
     if(inputArray[0] > 0): # go right
-        goRight(inputArray[0])
+        goRightButtons(inputArray[0])
     elif(inputArray[1] < 0): #go left
-        goLeft(inputArray[1])
-
-def goForward(input):
-    brain.screen.print("going forward")
+        goLeftButtons(inputArray[1])
+def goForwardButtons(input):
     drivetrain.drive(FORWARD, input, PERCENT)
     brain.screen.next_row()
-
-def goBack(input):
-    brain.screen.print("going back")
+def goBackButtons(input):
     drivetrain.drive(REVERSE, input, PERCENT)
     brain.screen.next_row()
-
-def goLeft(input):
-    brain.screen.print("going left")
+def goLeftButtons(input):
     right_drive_smart.spin(FORWARD, input, PERCENT)
     brain.screen.next_row()
-
-def goRight(input):
-    brain.screen.print("going right")
+def goRightButtons(input):
     left_drive_smart.spin(FORWARD, input, PERCENT)
     brain.screen.next_row()
-
 def stopMovement():
-    brain.screen.print("stopping forward/backward")
     drivetrain.drive(FORWARD, 0, PERCENT)
     brain.screen.next_row()
+def arrowKeyMovement():
+    xAxis = getXAxisInputButtons()
+    yAxis = getYAxisInputButtons()
+    inputArray = processButtonInputAndReturnMovementAsIntArray(xAxis, yAxis)
+    brain.screen.print(inputArray)
+    processButtonInputArrayAndCallMovementFuncs(inputArray)
+
+#process input from sticks
+def getLeftInput():
+    inputVal = controller.axis3.value()
+    return inputVal
+
+def getRightInput():
+    inputVal = controller.axis2.value()
+    return inputVal
+
+def Move(vals):
+    left_drive_smart.spin(vals[0])
+    right_drive_smart.spin(vals[1])
+
+def stickMovement():
+    vals = [getLeftInput(), getRightInput()]
+    Move(vals)
 
 #while loop
 while True:
-    wait(1000)
-    xAxis = getXAxisInput()
-    yAxis = getYAxisInput()
-    inputArray = processInputAndReturnMovementAsIntArray(xAxis, yAxis)
-    brain.screen.print(inputArray)
-    processInputArrayAndCallMovementFuncs(inputArray)
-    brain.screen.next_row()
-    counter += 1
-    if(counter == 5):
-        brain.screen.clear_screen()
-        brain.screen.set_cursor(1,1)
-        counter = 0
+    wait(10)
+    arrowKeyMovement()
+    stickMovement()
