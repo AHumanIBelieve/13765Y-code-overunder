@@ -16,6 +16,7 @@ Ports 9 and 10 - right of the drivetrain
 - [ ] on screen visuals
 - [ ] catapult (waiting on builders)
 - [ ] input (waiting on builders)
+- [ ] logarithmic drive code
 
 ## Changelog
 #### V1.0
