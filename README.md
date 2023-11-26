@@ -20,6 +20,12 @@ Added incremental speed movement.
 
 #### V2.0
 ##### 19/11/23
-Changed movement so that left stick controls left drive and right stick controls right drive. I think. Probably. Hopefully?
+Changed movement so that left stick controls left drive and right stick controls right drive (a.k.a. tank drive).
 
 Also the old movement code now applies to arrow buttons.
+
+#### V2.1
+##### 24/11/23
+* Reversed the robot so the front is now the back and the back is now the front.
+* Added debugging to stick movement
+* Removed arrow key movement
