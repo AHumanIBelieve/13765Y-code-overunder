@@ -9,6 +9,14 @@ Ports 1 and 2 - left of the drivetrain
 
 Ports 9 and 10 - right of the drivetrain
 
+## To do
+
+- [x] Tank drive
+- [x] simple debugging info
+- [ ] on screen visuals
+- [ ] catapult (waiting on builders)
+- [ ] input (waiting on builders)
+
 ## Changelog
 #### V1.0
 ##### 10/11/23
