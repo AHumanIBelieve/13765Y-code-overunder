@@ -13,7 +13,7 @@ Ports 8 and 7 - left of the drivetrain
 - [x] Tank drive
 - [x] simple debugging info
 - [ ] on screen visuals
-- [#] catapult (code ready, builders not)
+- [x] catapult (code ready, builders not)
 - [ ] intake (waiting on builders)
 - [x] logarithmic drive code
 
