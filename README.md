@@ -1,6 +1,6 @@
-# 13675Y MTS_CtrlAltDefeat Code 2023-24
+# 13765Y MTS_CtrlAltDefeat Code 2023-24
 ![logo](logo.png "MTS_CtrlAltDefeat")
-This repo contains code for the VEX VRC team 13675Y MTS_CtrlAltDefeat.
+This repo contains code for the VEX VRC team 13765Y MTS_CtrlAltDefeat.
 
 Notebook will be uploaded after the season.
 
@@ -38,3 +38,8 @@ Also the old movement code now applies to arrow buttons.
 * Reversed the robot so the front is now the back and the back is now the front.
 * Added debugging to stick movement
 * Removed arrow key movement
+
+#### V2.2
+##### 1/12/23
+* Added exponential drive code to allow for precision at low input
+* Added code to support a flywheel, with the arrow keys acting like a slider
