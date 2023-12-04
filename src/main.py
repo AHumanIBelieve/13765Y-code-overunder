@@ -31,7 +31,7 @@ brain.screen.next_row()
 def getLeftInput():
     ogInputVal = controller.axis3.value()
     inputVal = 0
-    if(ogInputVal >= 0):
+    if(ogInputVal > 0):
         inputVal = (2**(ogInputVal*(math.log(100)/math.log(2))/127))
     elif(ogInputVal < 0):
         ogInputVal = ogInputVal*-1
@@ -42,7 +42,7 @@ def getLeftInput():
 def getRightInput():
     ogInputVal = controller.axis2.value()
     inputVal = 0
-    if(ogInputVal >= 0):
+    if(ogInputVal > 0):
         inputVal = (2**(ogInputVal*(math.log(100)/math.log(2))/127))
     elif(ogInputVal < 0):
         ogInputVal = ogInputVal*-1
