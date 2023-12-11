@@ -70,13 +70,13 @@ def flywheel():
 
 def getFlyWheelInput():
     global flywheelSpeed
-    if(controller.buttonUp.pressing(), flywheelSpeed <100):
+    if(controller.buttonUp.pressing() and flywheelSpeed < 100):
         flywheelSpeed = flywheelSpeed + 5
-    elif(controller.buttonDown.pressing(), flywheelSpeed > 0):
+    elif(controller.buttonDown.pressing() and flywheelSpeed > 0):
         flywheelSpeed = flywheelSpeed - 5
 
 def spinFlyWheel():
-    flywheel_smart.spin(FORWARD, flywheel, PERCENT)
+    flywheel_smart.spin(FORWARD, flywheelSpeed, PERCENT)
 
 #while loop
 while True:
