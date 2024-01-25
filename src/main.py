@@ -72,9 +72,9 @@ def flywheel():
 def getFlyWheelInput():
     global flywheelSpeed
     if(controller.buttonUp.pressing() and flywheelSpeed < 100):
-        flywheelSpeed = flywheelSpeed + 5
+        flywheelSpeed = flywheelSpeed + 50
     elif(controller.buttonDown.pressing() and flywheelSpeed > 0):
-        flywheelSpeed = flywheelSpeed - 5
+        flywheelSpeed = flywheelSpeed - 50
 
 def spinFlyWheel():
     flywheel_smart.spin(FORWARD, flywheelSpeed, PERCENT)
@@ -88,10 +88,7 @@ def spinFlyWheel():
 brain.screen.print("starting auton")
 brain.screen.print("velocity set")
 drivetrain.drive(REVERSE, 100, PERCENT)
-for x in range(10):
-    wait(1, SECONDS)
-    brain.screen.print(x, ". e")
-    brain.screen.new_line()
+wait(10, SECONDS)
 drivetrain.drive(REVERSE, 0, PERCENT)
 right_drive_smart.spin(FORWARD)
 wait(1, SECONDS)
