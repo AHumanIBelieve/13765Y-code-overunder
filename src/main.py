@@ -88,11 +88,15 @@ def spinFlyWheel():
 brain.screen.print("starting auton")
 brain.screen.print("velocity set")
 drivetrain.drive(REVERSE, 100, PERCENT)
-for x in range(12):
+for x in range(10):
     wait(1, SECONDS)
     brain.screen.print(x, ". e")
     brain.screen.new_line()
 drivetrain.drive(REVERSE, 0, PERCENT)
+right_drive_smart.spin(FORWARD)
+wait(1, SECONDS)
+right_drive_smart.spin(FORWARD, 0, PERCENT)
+drivetrain.drive(REVERSE, 100, PERCENT)
 brain.screen.print("ending auton")
 
 #while loop
