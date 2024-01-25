@@ -42,3 +42,8 @@ Also the old movement code now applies to arrow buttons.
 ##### 1/12/23
 * Added exponential drive code to allow for precision at low input
 * Added code to support a flywheel, with the arrow keys acting like a slider
+
+#### V2.3
+##### 24/01/24
+* Added a simple auton script
+* Increased flywheel "slider" to +50 per click
