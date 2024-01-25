@@ -1,8 +1,8 @@
 # ---------------------------------------------------------------------------- #
 # 	Module:       main.py                                                      #
-#   Team:         13675Y MTS_CtrlAltDefeat                                     #
+#   Team:         13765Y MTS_CtrlAltDefeat                                     #
 # 	Author:       Chaitya Jain                                                 #
-# 	Description:  V5 project                                                   #
+# 	Description:  Code for VRC 2024: Over Under                                #
 # ---------------------------------------------------------------------------- #
 
 from vex import *
@@ -12,14 +12,14 @@ import math
 brain = Brain()
 controller = Controller()
 
-right_drive_back = Motor(Ports.PORT9, True)
-right_drive_front = Motor(Ports.PORT10, True)
-left_drive_back = Motor(Ports.PORT7)
-left_drive_front = Motor(Ports.PORT8)
+right_drive_back = Motor(Ports.PORT1, True)
+right_drive_front = Motor(Ports.PORT2, True)
+left_drive_back = Motor(Ports.PORT10)
+left_drive_front = Motor(Ports.PORT9)
 left_drive_smart = MotorGroup(left_drive_back, left_drive_front)
 right_drive_smart = MotorGroup(right_drive_back, right_drive_front)
-drivetrain = DriveTrain(left_drive_smart, right_drive_smart)
-flywheel_motor = Motor(Ports.PORT5)
+drivetrain = DriveTrain(left_drive_smart, right_drive_smart, 21.56, 18, 16, INCHES)
+flywheel_motor = Motor(Ports.PORT20)
 flywheel_smart = MotorGroup(flywheel_motor)
 
 counter = 0
@@ -67,6 +67,7 @@ flywheelSpeed = 0
 def flywheel():
     getFlyWheelInput()
     spinFlyWheel()
+    brain.screen.print(flywheelSpeed)
 
 def getFlyWheelInput():
     global flywheelSpeed
@@ -77,6 +78,22 @@ def getFlyWheelInput():
 
 def spinFlyWheel():
     flywheel_smart.spin(FORWARD, flywheelSpeed, PERCENT)
+
+#auton
+#drivetrain.drive_for(REVERSE, 36, INCHES)
+#drivetrain.turn_for(LEFT, 90, DEGREES)
+#flywheel_smart.spin(REVERSE, -20, PERCENT)
+#drivetrain.drive_for(FORWARD, 20, INCHES)
+
+brain.screen.print("starting auton")
+brain.screen.print("velocity set")
+drivetrain.drive(REVERSE, 100, PERCENT)
+for x in range(12):
+    wait(1, SECONDS)
+    brain.screen.print(x, ". e")
+    brain.screen.new_line()
+drivetrain.drive(REVERSE, 0, PERCENT)
+brain.screen.print("ending auton")
 
 #while loop
 while True:
