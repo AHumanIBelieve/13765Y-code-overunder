@@ -50,6 +50,6 @@ Also the old movement code now applies to arrow buttons.
 
 #### V2.4
 ##### 26/01/24
-* Changed folder structure: main match code is in folder ``match_code``, while separate skills scripts are in ``skills\skills_driver`` and ``skills\skills_auton``.
+* Changed folder structure: main match code is in folder ``match_code``, while separate skills scripts are in ``skills\driver\skills_driver`` and ``skills\auton\skills_auton``.
 * In driver skills, there is no pre-match auton, but is otherwise the same as the normal match code.
 * In auton skills, the flywheel is activated for 55 seconds, and it then drives forward in order to push match load in.
