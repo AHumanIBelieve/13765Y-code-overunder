@@ -4,10 +4,6 @@ This repo contains code for the VEX VRC team 13765Y MTS_CtrlAltDefeat.
 
 Notebook will be uploaded after the season.
 
-## Wiring Setup
-Ports 9 and 10 - right of the drivetrain
-Ports 8 and 7 - left of the drivetrain
-
 ## To do
 
 - [x] Tank drive
