@@ -4,15 +4,6 @@ This repo contains code for the VEX VRC team 13765Y MTS_CtrlAltDefeat.
 
 Notebook will be uploaded after the season.
 
-## To do
-
-- [x] Tank drive
-- [x] simple debugging info
-- [ ] on screen visuals
-- [x] catapult (code ready, builders not)
-- [ ] intake (waiting on builders)
-- [x] logarithmic drive code
-
 ## Changelog
 #### V1.0
 ##### 10/11/23
