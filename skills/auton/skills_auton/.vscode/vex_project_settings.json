@@ -4,12 +4,12 @@
 		"json": 2
 	},
 	"project": {
-		"name": "Driving",
-		"description": "the driving mode for this robot.",
-		"creationDate": "your mum",
+		"name": "Autonomous Skills",
+		"description": "",
+		"creationDate": "1/26/2024, 8:23:31 PM",
 		"platform": "V5",
 		"language": "python",
-		"slot": 1,
+		"slot": 3,
 		"sdkVersion": "V5_1_0_1_15",
 		"python": {
 			"main": "src/main.py"
