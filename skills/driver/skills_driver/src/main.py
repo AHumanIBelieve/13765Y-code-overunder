@@ -55,8 +55,8 @@ def getRightInput():
     return inputVal
 
 def Move(vals):
-    left_drive_smart.spin(REVERSE, vals[0], PERCENT)
-    right_drive_smart.spin(REVERSE, vals[1], PERCENT)
+    left_drive_smart.spin(REVERSE, vals[0]*0.9, PERCENT)
+    right_drive_smart.spin(REVERSE, vals[1]*0.9, PERCENT)
     brain.screen.print("left: " + str(vals[0]) + "| right: " + str(vals[1]))
     brain.screen.next_row()
 
@@ -75,10 +75,14 @@ def flywheel():
 
 def getFlyWheelInput():
     global flywheelSpeed
-    if(controller.buttonUp.pressing() and flywheelSpeed < 100):
-        flywheelSpeed = flywheelSpeed + 50
-    elif(controller.buttonDown.pressing() and flywheelSpeed > 0):
-        flywheelSpeed = flywheelSpeed - 50
+    if(controller.buttonL2.pressing()):
+        flywheelSpeed = 0
+    elif(controller.buttonL1.pressing()):
+        flywheelSpeed = 75
+    elif(controller.buttonR2.pressing()):
+        flywheelSpeed = 80
+    elif(controller.buttonR1.pressing()):
+        flywheelSpeed = 100
 
 def spinFlyWheel():
     flywheel_smart.spin(FORWARD, flywheelSpeed, PERCENT)
@@ -93,6 +97,3 @@ while True:
         brain.screen.clear_screen()
         brain.screen.set_cursor(1,1)
         counter = 0
-
-
-        

@@ -28,26 +28,15 @@ flywheel_smart = MotorGroup(flywheel_motor)
 
 #flywheel code
 
-flywheelSpeed = 100
-
-def flywheel():
-    getFlyWheelInput()
-    spinFlyWheel()
-    brain.screen.print(flywheelSpeed)
-
-def getFlyWheelInput():
-    global flywheelSpeed
-    if(controller.buttonUp.pressing() and flywheelSpeed < 100):
-        flywheelSpeed = flywheelSpeed + 50
-    elif(controller.buttonDown.pressing() and flywheelSpeed > 0):
-        flywheelSpeed = flywheelSpeed - 50
+flywheelSpeed = 80
 
 def spinFlyWheel():
     flywheel_smart.spin(FORWARD, flywheelSpeed, PERCENT)
 
-for i in range(55):
+
+for i in range(53):
     spinFlyWheel()
     wait(1, SECONDS)
 flywheelSpeed = 0
-drivetrain.drive(REVERSE, 100, PERCENT)
+drivetrain.drive(REVERSE, 60, PERCENT)
 wait(5, SECONDS)

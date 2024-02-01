@@ -51,8 +51,8 @@ def getRightInput():
     return inputVal
 
 def Move(vals):
-    left_drive_smart.spin(REVERSE, vals[0], PERCENT)
-    right_drive_smart.spin(REVERSE, vals[1], PERCENT)
+    left_drive_smart.spin(REVERSE, (vals[0]*0.9), PERCENT)
+    right_drive_smart.spin(REVERSE, (vals[1]*0.9), PERCENT)
     brain.screen.print("left: " + str(vals[0]) + "| right: " + str(vals[1]))
     brain.screen.next_row()
 
@@ -63,46 +63,52 @@ def stickMovement():
 #flywheel code
 
 flywheelSpeed = 0
+override = False
 
 def flywheel():
     getFlyWheelInput()
     spinFlyWheel()
-    brain.screen.print(flywheelSpeed)
+    brain.screen.print(flywheel_motor.velocity(PERCENT))
 
 def getFlyWheelInput():
     global flywheelSpeed
-    if(controller.buttonUp.pressing() and flywheelSpeed < 100):
-        flywheelSpeed = flywheelSpeed + 50
-    elif(controller.buttonDown.pressing() and flywheelSpeed > 0):
-        flywheelSpeed = flywheelSpeed - 50
+    if(controller.buttonL2.pressing()):
+        flywheelSpeed = 0
+    elif(controller.buttonL1.pressing()):
+        flywheelSpeed = 75
+    elif(controller.buttonR2.pressing()):
+        flywheelSpeed = 80
+    elif(controller.buttonR1.pressing()):
+        flywheelSpeed = 100
 
 def spinFlyWheel():
     flywheel_smart.spin(FORWARD, flywheelSpeed, PERCENT)
 
-#auton
-#drivetrain.drive_for(REVERSE, 36, INCHES)
-#drivetrain.turn_for(LEFT, 90, DEGREES)
-#flywheel_smart.spin(REVERSE, -20, PERCENT)
-#drivetrain.drive_for(FORWARD, 20, INCHES)
+brain.screen.draw_image_from_file("logo.png", 0, 0)
 
-brain.screen.print("starting auton")
-brain.screen.print("velocity set")
-drivetrain.drive(REVERSE, 100, PERCENT)
-wait(10, SECONDS)
-drivetrain.drive(REVERSE, 0, PERCENT)
-right_drive_smart.spin(FORWARD)
-wait(1, SECONDS)
-right_drive_smart.spin(FORWARD, 0, PERCENT)
-drivetrain.drive(REVERSE, 100, PERCENT)
-brain.screen.print("ending auton")
+def autonomous():
+    #auton
+    brain.screen.print("starting auton")
+    brain.screen.print("velocity set")
+    drivetrain.drive(REVERSE, 100, PERCENT)
+    wait(10, SECONDS)
+    drivetrain.drive(REVERSE, 0, PERCENT)
+    right_drive_smart.spin(FORWARD)
+    wait(1, SECONDS)
+    right_drive_smart.spin(FORWARD, 0, PERCENT)
+    drivetrain.drive(REVERSE, 100, PERCENT)
+    brain.screen.print("ending auton")
 
-#while loop
-while True:
-    wait(10)
-    stickMovement()
-    flywheel()
-    counter = counter +1
-    if(counter == 5):
-        brain.screen.clear_screen()
-        brain.screen.set_cursor(1,1)
-        counter = 0
+def usercontrol():
+    global counter
+    while True:
+        wait(10)
+        stickMovement()
+        flywheel()
+        counter = counter +1
+        if(counter == 5):
+            brain.screen.clear_screen()
+            brain.screen.set_cursor(1,1)
+            counter = 0
+
+comp = Competition(usercontrol, autonomous)
