@@ -33,10 +33,15 @@ flywheelSpeed = 80
 def spinFlyWheel():
     flywheel_smart.spin(FORWARD, flywheelSpeed, PERCENT)
 
+# flywheel PID
 
-for i in range(53):
-    spinFlyWheel()
-    wait(1, SECONDS)
-flywheelSpeed = 0
-drivetrain.drive(REVERSE, 60, PERCENT)
-wait(5, SECONDS)
+def PID(wantedSpeed):
+    if(flywheel_smart.velocity(PERCENT) > 80):
+        flywheel_smart.set_velocity(0)
+
+def auton():
+    for i in range(53):
+        spinFlyWheel()
+        wait(1, SECONDS)
+    flywheelSpeed = 0
+    drivetrain.drive(REVERSE, 60, PERCENT)

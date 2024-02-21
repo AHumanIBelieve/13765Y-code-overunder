@@ -87,11 +87,18 @@ def getFlyWheelInput():
 def spinFlyWheel():
     flywheel_smart.spin(FORWARD, flywheelSpeed, PERCENT)
 
+# flywheel PID
+
+def PID(wantedSpeed):
+    if(flywheel_smart.velocity(PERCENT) > 80):
+        flywheel_smart.set_velocity(0)
+
 #while loop
 while True:
     wait(10)
     stickMovement()
     flywheel()
+    PID(flywheelSpeed)
     counter = counter +1
     if(counter == 5):
         brain.screen.clear_screen()
