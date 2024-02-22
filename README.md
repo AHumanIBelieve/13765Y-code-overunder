@@ -65,5 +65,10 @@ Also the old movement code now applies to arrow buttons.
 
 #### V2.6
 ##### 01/02/24
-* Put auton and driver control into their own functions
+* Put auton and driver control into their own functions (for matches)
 * Put them in the ``Competition`` class so they get called when they should.
+
+#### V2.7
+##### 12/02/24
+* Added support for wings, when wings are in a position, they are kept there.
+* Wing button is A
