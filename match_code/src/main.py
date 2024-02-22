@@ -109,9 +109,9 @@ wingDown = False
 def wing():
     global wingDown
     if(wingDown == False):
-        wing_motor_smart.spin(FORWARD, 10, PERCENT)
+        wing_motor_smart.spin(FORWARD, 100, PERCENT)
     elif(wingDown == True):
-        wing_motor_smart.spin(REVERSE, 10, PERCENT)
+        wing_motor_smart.spin(REVERSE, 100, PERCENT)
     if(controller.buttonA.pressing()): 
         if(wingDown == False):
             wing_motor_smart.spin_for(REVERSE, 0.2, SECONDS, 70, PERCENT)
