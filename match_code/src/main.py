@@ -63,8 +63,6 @@ def stickMovement():
     if(controller.buttonA.pressing()):
         vals[0] = vals[0] * 0.5
         vals[1] = vals[1] * 0.5
-    elif(controller.buttonB.pressing()):
-        goUnderPoleAutonomous()
     Move(vals)
 
 def goUnderPoleAutonomous():
@@ -100,7 +98,7 @@ def spinFlyWheel():
 
 def PID(wantedSpeed):
     if(flywheel_smart.velocity(PERCENT) > 80):
-        flywheel_smart.set_velocity((wantedSpeed-2), PERCENT)
+        flywheel_smart.set_velocity((wantedSpeed-1), PERCENT)
 
 # wing
         
@@ -109,15 +107,15 @@ wingDown = False
 def wing():
     global wingDown
     if(wingDown == False):
-        wing_motor_smart.spin(FORWARD, 100, PERCENT)
+        wing_motor_smart.spin(FORWARD, 10, PERCENT)
     elif(wingDown == True):
-        wing_motor_smart.spin(REVERSE, 100, PERCENT)
+        wing_motor_smart.spin(REVERSE, 70, PERCENT)
     if(controller.buttonA.pressing()): 
         if(wingDown == False):
             wing_motor_smart.spin_for(REVERSE, 0.2, SECONDS, 70, PERCENT)
             wingDown = True
         elif (wingDown == True):
-            wing_motor_smart.spin_for(FORWARD, 0.2, SECONDS, 50, PERCENT)
+            wing_motor_smart.spin_for(FORWARD, 0.8, SECONDS, 90, PERCENT)
             wingDown = False
 
 def autonomous():
@@ -146,7 +144,6 @@ def autonomous():
 def usercontrol():
     global counter
     global flywheelSpeed
-    flywheelSpeed = 80
     while True:
         wait(10)
         stickMovement()
