@@ -18,8 +18,10 @@ left_drive_back = Motor(Ports.PORT10)
 left_drive_front = Motor(Ports.PORT9)
 left_drive_smart = MotorGroup(left_drive_back, left_drive_front)
 right_drive_smart = MotorGroup(right_drive_back, right_drive_front)
-wing_motor = Motor(Ports.PORT16, REVERSE)
-wing_motor_smart = MotorGroup(wing_motor)
+wing_motor_left = Motor(Ports.PORT16, REVERSE)
+wing_motor_left_smart = MotorGroup(wing_motor_left)
+wing_motor_right = Motor(Ports.PORT14)
+wing_motor_right_smart = MotorGroup(wing_motor_right)
 drivetrain = DriveTrain(left_drive_smart, right_drive_smart, 21.56, 18, 16, INCHES)
 flywheel_motor = Motor(Ports.PORT20)
 flywheel_smart = MotorGroup(flywheel_motor)
@@ -107,15 +109,19 @@ wingDown = False
 def wing():
     global wingDown
     if(wingDown == False):
-        wing_motor_smart.spin(FORWARD, 10, PERCENT)
+        wing_motor_left_smart.spin(FORWARD, 10, PERCENT)
+        wing_motor_right_smart.spin(REVERSE, 10, PERCENT)
     elif(wingDown == True):
-        wing_motor_smart.spin(REVERSE, 70, PERCENT)
+        wing_motor_left_smart.spin(REVERSE, 70, PERCENT)
+        wing_motor_right_smart.spin(FORWARD, 70, PERCENT)
     if(controller.buttonA.pressing()): 
         if(wingDown == False):
-            wing_motor_smart.spin_for(REVERSE, 0.2, SECONDS, 70, PERCENT)
+            wing_motor_left_smart.spin_for(REVERSE, 0.2, SECONDS, 70, PERCENT)
+            wing_motor_right_smart.spin_for(FORWARD, 0.2, SECONDS, 70, PERCENT)
             wingDown = True
         elif (wingDown == True):
-            wing_motor_smart.spin_for(FORWARD, 0.8, SECONDS, 90, PERCENT)
+            wing_motor_left_smart.spin_for(FORWARD, 0.8, SECONDS, 90, PERCENT)
+            wing_motor_right_smart.spin_for(REVERSE, 0.8, SECONDS, 90, PERCENT)
             wingDown = False
 
 def autonomous():
@@ -123,23 +129,16 @@ def autonomous():
     brain.screen.draw_image_from_file('logoForBrain.bmp', 0, 0)
     brain.screen.print("starting auton")
     brain.screen.print("velocity set")
-    drivetrain.drive(REVERSE, 30, PERCENT)
-    wait(0.5, SECONDS)
+    wing_motor_left_smart.spin_for(REVERSE, 0.2, SECONDS, 70, PERCENT)
+    wingDown = True
+    drivetrain.drive(REVERSE, 50, PERCENT)
+    wait(1, SECONDS)
     drivetrain.drive(REVERSE, 0, PERCENT)
-    right_drive_smart.spin(FORWARD)
-    wait(0.3, SECONDS)
-    right_drive_smart.spin(FORWARD, 0, PERCENT)
-    drivetrain.drive(FORWARD, 30, PERCENT)
-    wait(0.7, SECONDS)
-    drivetrain.drive(FORWARD, 0, PERCENT)
-    right_drive_smart.spin_for(FORWARD, 0.5, SECONDS, 50, PERCENT)
-    wait(0.5, SECONDS)
-    right_drive_smart.spin(FORWARD, 0, PERCENT)
-    left_drive_smart.spin(REVERSE, 15, PERCENT)
-    wait(0.2, SECONDS)
-    left_drive_smart.spin(REVERSE, 0, PERCENT)
+    drivetrain.drive(FORWARD, 50, PERCENT)
+    wait(1, SECONDS)
+    drivetrain.drive(FORWARD, 0)
+    left_drive_smart.spin_for(REVERSE, 3, SECONDS, 30, PERCENT)
     brain.screen.print("ending auton")
-
 
 def usercontrol():
     global counter
