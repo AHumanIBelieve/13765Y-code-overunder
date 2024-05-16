@@ -1,7 +1,6 @@
 # ---------------------------------------------------------------------------- #
 #                                                                              #
 # 	Module:       main.py                                                      #
-# 	Author:       Chaitya Jain                                                 #
 # 	Created:      1/26/2024, 2:59:12 PM                                        #
 # 	Description:  V5 project                                                   #
 #                                                                              #
